@@ -24,8 +24,6 @@ function S.get_servers()
                         editor = {
                                 defaultFormatter = "Prisma.prisma",
                         },
-                html = {},
-                emmet_language_server = {}
                 },
         }
 end

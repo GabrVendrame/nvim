@@ -64,19 +64,4 @@ function U.setup_diagnostics()
         })
 end
 
-function U.get_ensure_installed()
-        local utils = require("gabrvendrame.tables")
-
-        local servers = utils.get_servers()
-        local formatters = utils.get_formatters()
-        local linters = utils.get_linters()
-
-        local ensure_installed = vim.tbl_keys(servers)
-
-        vim.list_extend(ensure_installed, formatters)
-        vim.list_extend(ensure_installed, linters)
-
-        return ensure_installed
-end
-
 return U
