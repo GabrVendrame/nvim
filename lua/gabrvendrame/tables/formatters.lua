@@ -5,7 +5,7 @@ function F.get_formatters()
                 "stylua",
                 "black",
                 "sqruff",
-                "prettier",
+                "oxfmt",
         }
 end
 

@@ -7,7 +7,6 @@ return {
                 ensure_installed = {
                         "bash",
                         "dockerfile",
-                        -- "go",
                         "javascript",
                         "jsdoc",
                         "lua",
@@ -15,7 +14,6 @@ return {
                         "sql",
                         "typescript",
                         "vimdoc",
-                        "html",
                 },
                 auto_install = true,
                 highlight = {

@@ -15,23 +15,23 @@ return {
         -- }
         --
         --
-        -- "folke/tokyonight.nvim",
-        -- lazy = false,
-        -- priority = 1000,
-        -- opts = {
-        --         transparent = true,
-        -- },
-        --
-        --
-        "EdenEast/nightfox.nvim",
+        "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         opts = {
-                options = {
-                        transparent = true,
-                        styles = {
-                                comments = "italic",
-                        },
-                },
+                transparent = true,
         },
+        --
+        --
+        -- "EdenEast/nightfox.nvim",
+        -- lazy = false,
+        -- priority = 1000,
+        -- opts = {
+        --         options = {
+        --                 transparent = true,
+        --                 styles = {
+        --                         comments = "italic",
+        --                 },
+        --         },
+        -- },
 }
