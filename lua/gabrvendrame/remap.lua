@@ -45,7 +45,9 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Q" })
 -- INFO: i'm not using tmux, don't know what this do
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", "Open tmux sessionizer")
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>f", function()
+    require("conform").format({ async = true })
+end, { desc = "Format buffer" })
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Quickfix next" })
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Quickfix previous" })
@@ -65,8 +67,8 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file exe
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/gabrvendrame/lazy.lua<CR>", { desc = "Edit lazy config" })
 
 vim.keymap.set("n", "<leader>vim", function()
-        local myvimrc = vim.fn.expand("$MYVIMRC")
-        local dirname = vim.fn.fnamemodify(myvimrc, ":h")
+    local myvimrc = vim.fn.expand("$MYVIMRC")
+    local dirname = vim.fn.fnamemodify(myvimrc, ":h")
 
-        vim.cmd("Ex " .. dirname)
+    vim.cmd("Ex " .. dirname)
 end, { desc = "Opem nvim config directory" })
