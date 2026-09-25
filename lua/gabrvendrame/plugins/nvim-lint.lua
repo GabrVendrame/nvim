@@ -7,9 +7,6 @@ return {
 
         lint.linters_by_ft = tools.by_filetype("lint")
 
-        -- oxlint's github format repeats "file:line:col: " inside the
-        -- message body, which nvim-lint keeps verbatim. Strip it so
-        -- virtual text is not mostly file path.
         local oxlint = lint.linters.oxlint
         local parse = oxlint.parser
         oxlint.parser = function(output, bufnr, cwd)

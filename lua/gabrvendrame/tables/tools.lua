@@ -1,11 +1,8 @@
--- Every tool named once. `mason` is the package to install and doubles as the
--- conform formatter / nvim-lint linter name. `role` decides which of the two
--- consumes it, `filetypes` is what it runs on.
 local M = {}
 
 M.list = {
     { mason = "stylua", role = "format", filetypes = { "lua" } },
-    { mason = "black", role = "format", filetypes = { "python" } },
+    { mason = "black",  role = "format", filetypes = { "python" } },
     { mason = "sqruff", role = "format", filetypes = { "sql" } },
     {
         mason = "oxfmt",
@@ -24,7 +21,7 @@ M.list = {
             "yaml",
         },
     },
-    { mason = "mypy", role = "lint", filetypes = { "python" } },
+    { mason = "mypy",   role = "lint", filetypes = { "python" } },
     { mason = "sqruff", role = "lint", filetypes = { "sql" } },
     {
         mason = "oxlint",
@@ -38,7 +35,6 @@ M.list = {
     },
 }
 
--- shape conform and nvim-lint both want: { [filetype] = { "tool", ... } }
 function M.by_filetype(role)
     local by_ft = {}
 
@@ -54,7 +50,6 @@ function M.by_filetype(role)
     return by_ft
 end
 
--- mason packages, deduplicated (sqruff both formats and lints)
 function M.packages()
     local seen = {}
     local packages = {}
