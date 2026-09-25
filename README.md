@@ -28,10 +28,10 @@ This project is a collection of my custom Neovim configurations. It leverages th
 
 ## Prerequisites
 
-- [Neovim](https://neovim.io/) (v0.8 or higher recommended)
+- [Neovim](https://neovim.io/) v0.11 or higher (required: `vim.lsp.config`, `vim.diagnostic.jump`, `vim.hl.on_yank`)
 
 **Note:**
-v0.11.3 used while builting this configuration.
+v0.12.5 used while building this configuration.
 
 ## License
 

@@ -16,50 +16,52 @@ local lsp_attach_group = augroup("LspAttach", { clear = true })
 local lsp_detach_group = augroup("LspDetach", { clear = true })
 
 local function setup_lsp_highlight(client, bufnr)
-        local method = vim.lsp.protocol.Methods.textDocument_documentHighlight
+    local method = vim.lsp.protocol.Methods.textDocument_documentHighlight
 
-        local is_supported = client:supports_method(method)
-        if not is_supported then
-                return
-        end
+    local is_supported = client and utils.client_supports_method(client, method, bufnr)
+    if not is_supported then
+        return
+    end
 
-        autocmd({ "CursorHold", "CursorHoldI" }, {
-                group = lsp_hl_group,
-                buffer = bufnr,
-                callback = vim.lsp.buf.document_highlight,
-        })
+    autocmd({ "CursorHold", "CursorHoldI" }, {
+        group = lsp_hl_group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+    })
 
-        autocmd({ "CursorMoved", "CursorMovedI" }, {
-                group = lsp_hl_group,
-                buffer = bufnr,
-                callback = vim.lsp.buf.clear_references,
-        })
+    autocmd({ "CursorMoved", "CursorMovedI" }, {
+        group = lsp_hl_group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+    })
 end
 
 autocmd("TextYankPost", {
-        desc = "Highlight when yanking",
-        group = yank_group,
-        callback = function()
-                vim.hl.on_yank()
-        end,
+    desc = "Highlight when yanking",
+    group = yank_group,
+    callback = function()
+        vim.hl.on_yank()
+    end,
 })
 
 autocmd("LspAttach", {
-        group = lsp_attach_group,
-        callback = function(event)
-                local buf = event.buf
-                local client = vim.lsp.get_client_by_id(event.data.client_id)
+    group = lsp_attach_group,
+    callback = function(event)
+        local buf = event.buf
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-                utils.set_keymaps(buf)
-                setup_lsp_highlight(client, buf)
-                utils.setup_inlay_hints(client, buf)
-        end,
+        utils.set_keymaps(buf)
+        setup_lsp_highlight(client, buf)
+        utils.setup_inlay_hints(client, buf)
+    end,
 })
 
 autocmd("LspDetach", {
-        group = lsp_detach_group,
-        callback = function(event)
-                clear_autocmds({ group = "LspHighlight", buffer = event.buf })
-                vim.lsp.buf.clear_references()
-        end,
+    group = lsp_detach_group,
+    callback = function(event)
+        clear_autocmds({ group = "LspHighlight", buffer = event.buf })
+        if vim.api.nvim_buf_is_valid(event.buf) then
+            vim.api.nvim_buf_call(event.buf, vim.lsp.buf.clear_references)
+        end
+    end,
 })
